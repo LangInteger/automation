@@ -13,7 +13,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt='%m-%d %H:%M',
-                    filename='jenkins_build.log',
+                    filename='tmp_jenkins_build.log',
                     filemode='w')
 # define a Handler which writes INFO messages or higher to the sys.stderr
 console = logging.StreamHandler()
@@ -25,8 +25,9 @@ console.setFormatter(formatter)
 # add the handler to the root logger
 logging.getLogger('').addHandler(console)
 
-login_url_pattern = "https://{env}-jenkins.teyixing.com/"
-url_pattern = "https://{env}-jenkins.teyixing.com/view/{env}-tyx-env-{seq}/job/{env}-{name}-env-{seq}"
+DOMAIN_URL_PATTERN = "https://{env}-jenkins.teyixing.com/"
+JOB_URL_PATH = "view/{env}-tyx-env-{seq}/job/{env}-{name}-env-{seq}"
+CONFIG_URL_PATH = JOB_URL_PATH + "/config"
 
 
 def check_and_get_params():
@@ -38,16 +39,26 @@ def check_and_get_params():
         "-s", "--seq", choices=['1', '2', '3', '4', '5'], required=True, help="namespace sequence, 1/2/3/4")
     parser.add_argument("-n", "--name", required=True,
                         help="service name, tmc-services")
+    parser.add_argument("-b", "--branch", required=False,
+                        help="branch name, master")
     args = parser.parse_args()
     return args
 
 
+def build_url_base(args, pattern):
+    return pattern.format(env=args.env, seq=args.seq, name=args.name)
+
+
 def build_login_url(args):
-    return login_url_pattern.format(env=args.env)
+    return build_url_base(args, DOMAIN_URL_PATTERN)
 
 
 def build_url(args):
-    return url_pattern.format(env=args.env, seq=args.seq, name=args.name)
+    return build_url_base(args, DOMAIN_URL_PATTERN + JOB_URL_PATH)
+
+
+def build_config_url(args):
+    return build_url_base(args, CONFIG_URL_PATH)
 
 
 def test_connection(build, args, cookies):
@@ -78,6 +89,21 @@ def login(args, driver):
     return driver.get_cookies()
 
 
+def change_git_branch(args, driver):
+    if args.branch:
+        logging.info("Change build branch to {0}".format(args.branch))
+        do_change_git_branch(args, driver)
+
+
+def do_change_git_branch(args, driver):
+    url = build_config_url(args)
+    driver.get(url)
+    driver.find_element_by_xpath(
+        '//*[*name="branches"]/table/tbody/tr[1]/td[2]/input').send_keys(args.branch)
+
+    driver.find_element_by_name("branches").i
+
+
 def do_build(args, driver):
     url = build_url(args)
     driver.get(url)
@@ -88,10 +114,13 @@ def do_build(args, driver):
 
 def build():
     args = check_and_get_params()
+
     test_connection(build_login_url, args, None)
     driver = webdriver.Chrome()
     cookies = login(args, driver)
+
     test_connection(build_url, args, cookies)
+    change_git_branch(args, driver)
     do_build(args, driver)
 
 
