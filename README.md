@@ -40,4 +40,4 @@ Install with `pip3 install requests`.
 
 ## 2 Run
 
-> python3 jenkins_build.py
+> python3 jenkins_build.py -e dev -s 2 -n tmc-services
