@@ -67,7 +67,7 @@ def test_connection(build, args, cookies):
         logging.error("{0} is not accessible, check you params and run again.".format(url))
         exit(2)
 
-def login(driver):
+def login(arges, driver):
     url = build_login_url(args)
     driver.get(url)
     
@@ -76,7 +76,7 @@ def login(driver):
     driver.find_element_by_name("Submit").click()
     return driver.get_cookies()
 
-def do_build(driver):
+def do_build(arges, driver):
     url = build_url(args)
     driver.get(url)
     
@@ -87,8 +87,8 @@ def build():
     args = check_and_get_params()
     test_connection(build_login_url, args, None)
     driver = webdriver.Chrome('./chromedriver')
-    cookies = login(driver)
+    cookies = login(arges, driver)
     test_connection(build_url, args, cookies)
-    do_build(driver)
+    do_build(arges, driver)
 
 build()
