@@ -83,9 +83,12 @@ def do_build(driver):
     driver.find_element_by_link_text("Build Now").click()
     logging.info("Build started...")
 
-args = check_and_get_params()
-test_connection(build_login_url, args, None)
-driver = webdriver.Chrome('./chromedriver')
-cookies = login(driver)
-test_connection(build_url, args, cookies)
-do_build(driver)
+def build():
+    args = check_and_get_params()
+    test_connection(build_login_url, args, None)
+    driver = webdriver.Chrome('./chromedriver')
+    cookies = login(driver)
+    test_connection(build_url, args, cookies)
+    do_build(driver)
+
+build()
