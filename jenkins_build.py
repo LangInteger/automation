@@ -37,15 +37,6 @@ def check_and_get_params():
     args = parser.parse_args()
     return args
 
-def getResponseHeaders(browser):
-    har = json.loads(browser.get_log('har')[0]['message'])
-    return OrderedDict(sorted([(header["name"], header["value"]) for header in har['log']['entries'][0]['response']["headers"]], key = lambda x: x[0]))
-
-def getResponseStatus(browser):
-    har = json.loads(browser.get_log('har')[0]['message'])
-    logging.info(har)
-    return (har['log']['entries'][0]['response']["status"])
-
 def build_login_url(args):
     return login_url_pattern.format(env = args.env)
 
@@ -86,7 +77,7 @@ def do_build(args, driver):
 def build():
     args = check_and_get_params()
     test_connection(build_login_url, args, None)
-    driver = webdriver.Chrome('./chromedriver')
+    driver = webdriver.Chrome("D:\software\\binary\chromedriver.exe")
     cookies = login(args, driver)
     test_connection(build_url, args, cookies)
     do_build(args, driver)
