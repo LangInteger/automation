@@ -89,7 +89,7 @@ def do_build(args, driver):
 def build():
     args = check_and_get_params()
     test_connection(build_login_url, args, None)
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome('./chromedriver')
     cookies = login(args, driver)
     test_connection(build_url, args, cookies)
     do_build(args, driver)
