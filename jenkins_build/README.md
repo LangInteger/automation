@@ -27,10 +27,11 @@ Download via pip3：`pip3 install requests`.
 
 ## 2 Usage
 
+- cd jenkins_build
 - python jenkins_build.py -e dev -s 2 -n tmc-services
   - -e/--env: of which kind of environment
   - -s/--seq: of which sequence of this kind of environment
-  - -n/--name: of which service 
+  - -n/--name: of which service
 
 In some situation, may only this works:
 
