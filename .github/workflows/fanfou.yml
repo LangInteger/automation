@@ -26,4 +26,4 @@ jobs:
         curl --request POST \
         --url $URL \
         --header 'content-type: application/json' \
-        --data-binary '@/.github/workflows/fanfou-content.text'
+        --data-binary '@./.github/workflows/fanfou-content.text'
