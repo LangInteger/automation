@@ -22,8 +22,11 @@ jobs:
     - name: send notification
       env:
         URL: ${{ secrets.TEHANG_SHENGHUO_ROBOT_WEBHOOK }}
-      uses: wei/curl@v1
-      with:
-        args: $URL -H 'Content-Type:application/json' -d '{"msgtype":"text","text":{"content":"hello world"}}'
-         
-
+      run: |
+        curl --request POST \
+        --url $URL \
+        --header 'content-type: application/json' \
+        --data '{
+          "msgtype":"text",
+          "text":{"content":"hello world"}
+          }'
