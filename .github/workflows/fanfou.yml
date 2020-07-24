@@ -17,8 +17,10 @@ jobs:
     steps:
 
     # 发送通知
-    - name: Run a one-line script
+    - name: send notification
       env:
         URL: ${{ secrets.TEHANG_SHENGHUO_ROBOT_WEBHOOK }}
-      run: curl $URL -H "Content-Type: application/json" -d '{"msgtype": "text", "text": {"content": "一分钟一次消息-来自阿狼"}}'
+      uses: wei/curl@v1
+      with:
+        args: $URL -H "Content-Type: application/json" -d '{"msgtype": "text", "text": {"content": "一分钟一次消息-来自阿狼"}}'
 
