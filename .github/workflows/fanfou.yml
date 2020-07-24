@@ -3,7 +3,8 @@ name: 饭否
 # 北京时间周一至周五下午四点执行
 on:
   schedule:
-  - cron: "0 8 * * 1-5"
+#  - cron: "0 8 * * 1-5"
+  - cron: "1 * * * *"
 
 # 通知
 jobs:
@@ -23,7 +24,7 @@ jobs:
               {
                 "msgtype": "text",
                 "text": {
-                  "content": "吃饭不"
+                  "content": "一分钟一次消息-来自阿狼"
                 }
               }'
 
