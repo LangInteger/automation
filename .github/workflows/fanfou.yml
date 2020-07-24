@@ -4,7 +4,7 @@ name: fanfou
 on:
   schedule:
 #  - cron: "0 8 * * 1-5"
-  - cron: "*/1 * * * *"
+  - cron: "*/30 * * * *"
 
 # 通知
 jobs:
