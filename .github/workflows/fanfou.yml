@@ -1,0 +1,29 @@
+name: 饭否
+
+# 北京时间周一至周五下午四点执行
+on:
+  schedule:
+  - cron: "0 8 * * 1-5"
+
+# 通知
+jobs:
+  # 包含一个通知任务
+  notification:
+    # 使用最新 ubuntu 系统
+    runs-on: ubuntu-latest
+
+    # 具体步骤
+    steps:
+
+    # 发送通知
+    - name: Run a one-line script
+      run: curl '${{ secrets.TEHANG_SHENGHUO_ROBOT_WEBHOOK }}' \
+           -H 'Content-Type: application/json' \
+           -d '
+              {
+                "msgtype": "text",
+                "text": {
+                  "content": "吃饭不"
+                }
+              }'
+
