@@ -22,7 +22,8 @@ jobs:
         URL: ${{ secrets.TEHANG_SHENGHUO_ROBOT_WEBHOOK }}
       uses: wei/curl@v1
       with:
+        args: -X POST https://httpbin.org/post
 #        args: $URL -H "Content-Type: application/json" -d '{"msgtype": "text", "text": {"content": "一分钟一次消息-来自阿狼"}}'
         # args: www.baidu.com -H 'Content-Type: application/json' -d '{}'
-         args: -X POST https://httpbin.org/post
+         
 
