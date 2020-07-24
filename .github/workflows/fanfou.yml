@@ -18,13 +18,5 @@ jobs:
 
     # 发送通知
     - name: Run a one-line script
-      run: curl '${{ secrets.TEHANG_SHENGHUO_ROBOT_WEBHOOK }}' \
-           -H 'Content-Type: application/json' \
-           -d '
-              {
-                "msgtype": "text",
-                "text": {
-                  "content": "一分钟一次消息-来自阿狼"
-                }
-              }'
+      run: curl '${{ secrets.TEHANG_SHENGHUO_ROBOT_WEBHOOK }}' -H 'Content-Type: application/json' -d '{"msgtype": "text", "text": {"content": "一分钟一次消息-来自阿狼"}}'
 
