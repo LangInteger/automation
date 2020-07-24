@@ -1,4 +1,4 @@
-name: 饭否
+name: fanfou
 
 # 北京时间周一至周五下午四点执行
 on:
