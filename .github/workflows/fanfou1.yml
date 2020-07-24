@@ -1,0 +1,19 @@
+name: fanfou1
+
+# 北京时间周一至周五下午四点执行
+on:
+  schedule:
+#  - cron: "0 8 * * 1-5"
+  - cron: "1 * * * *"
+
+# 通知
+jobs:
+  curl:
+    runs-on: ubuntu-latest
+    steps:
+    - name: curl
+      uses: wei/curl@v1
+      with:
+        args: -X POST https://httpbin.org/post
+         
+
