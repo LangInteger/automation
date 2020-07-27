@@ -2,8 +2,8 @@ name: yufou
 
 # 北京时间周四、周五下午5点40执行
 on:
-  push:
-    branches: [ master ]
+#  push:
+#    branches: [ master ]
   schedule:
   - cron: "0 9 * * 4-5"
 #  - cron: "*/60 * * * *"
