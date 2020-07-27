@@ -2,11 +2,11 @@ name: fanfou
 
 # 北京时间周一至周五下午四点执行
 on:
-  push:
-    branches: [ master ]
+#  push:
+#    branches: [ master ]
   schedule:
-#  - cron: "0 8 * * 1-5"
-  - cron: "*/60 * * * *"
+  - cron: "0 8 * * 1-5"
+#  - cron: "*/60 * * * *"
 
 # 通知
 jobs:
