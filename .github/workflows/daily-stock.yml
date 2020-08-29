@@ -6,17 +6,15 @@ on: [push]
 jobs:
   notification:
     runs-on: ubuntu-latest
-      steps:
-        - name: checkout repo content
-          uses: actions/checkout@v2
-        - name: setup python
-          uses: actions/setup-python@v2
-          with:
-            python-version: 3.8
-        - name: execute daily stock
-          run: |
-            python daily_stock/daily_stock.py $URL
-          env:
-            URL: ${{ A_LANG_SERVER_JIANG_URL }} # if run.py requires passwords..etc, set it as secrets
-        - name: export index
-          .... # use crosponding script or actions to help export.
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v2
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: execute daily stock
+        run: |
+          python daily_stock/daily_stock.py $URL
+        env:
+          URL: ${{ A_LANG_SERVER_JIANG_URL }} # if run.py requires passwords..etc, set it as secrets
