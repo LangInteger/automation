@@ -1,9 +1,9 @@
 name: daily-stock
 
-on: 
-  schedule:
+on: [push]
+  # schedule:
     # - cron: “0 0 * * *” #runs at 00:00 UTC everyday
-    - cron: "*/30 * * * *"
+    # - cron: "*/30 * * * *"
 jobs:
   notification:
     runs-on: ubuntu-latest
