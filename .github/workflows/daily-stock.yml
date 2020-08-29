@@ -17,4 +17,4 @@ jobs:
         run: |
           python daily_stock/daily_stock.py $URL
         env:
-          URL: ${{ A_LANG_SERVER_JIANG_URL }} # if run.py requires passwords..etc, set it as secrets
+          URL: ${{ secrets.A_LANG_SERVER_JIANG_URL }} # if run.py requires passwords..etc, set it as secrets
