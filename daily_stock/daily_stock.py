@@ -20,4 +20,5 @@ jsonData = json.loads(page.text.encode('utf-8').decode('utf-8'))
 
 desc = jsonData[0]['Name'] + ' 收：' + jsonData[0]['Price'] + ' 涨跌：' + jsonData[0]['ChangeRate'] + "\n\r\n\r" + jsonData[1]['Name'] + ' 收：' + jsonData[1]['Price'] + ' 涨跌：' + jsonData[1]['ChangeRate']
 params = {'text':'每日财经数据','desp':desc}
-requests.get(DESTINATION, params = params)
+headers = {"User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36"}
+requests.get(DESTINATION, params = params，headers = headers)
