@@ -15,6 +15,8 @@ jobs:
           python-version: 3.8
       - name: execute daily stock
         run: |
+          python -m pip install --upgrade pip
+          pip install requests
           python daily_stock/daily_stock.py $URL
         env:
           URL: ${{ secrets.A_LANG_SERVER_JIANG_URL }} # if run.py requires passwords..etc, set it as secrets
