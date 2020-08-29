@@ -1,9 +1,11 @@
 name: daily-stock
 
-on: [push]
-  # schedule:
-    # - cron: “0 0 * * *” #runs at 00:00 UTC everyday
-    # - cron: "*/30 * * * *"
+on:
+#  push:
+#    branches:
+#      - master
+  schedule:
+    - cron: "10 17,20,23 * * *" # 北京时间每日9点10分，12点10分和15点10分
 jobs:
   notification:
     runs-on: ubuntu-latest
