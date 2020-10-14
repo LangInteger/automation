@@ -25,4 +25,5 @@ desc = jsonData[0]['Name'] + ' 收：' + jsonData[0]['Price'] + ' 涨跌：' + j
      + jsonData[5]['Name'] + ' 收：' + jsonData[5]['Price'] + ' 涨跌：' + jsonData[5]['ChangeRate'] + "\n\r\n\r"
 params = {'text':'每日财经数据','desp':desc}
 response = requests.post(argv[1], params)
+print(argv[1])
 print(response)
