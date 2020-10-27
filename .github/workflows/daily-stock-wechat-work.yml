@@ -21,5 +21,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests
           python daily_stock/daily_stock_wechat_work.py $URL
+          python daily_stock/daily_stock_wechat_work.py $URL1
         env:
-          URL: ${{ secrets.TEHANG_CAI_JING_ROBOT_WEBHOOK_URL }} # if run.py requires passwords..etc, set it as secrets
+          URL: ${{ secrets.TEHANG_CAI_JING_ROBOT_WEBHOOK_URL }}
+          URL1: ${{ secrets.A_LANG_CORP_DAILY_STOCK }}
