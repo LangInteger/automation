@@ -1,11 +1,11 @@
 name: fanfou
 
-# 北京时间周一至周五下午四点执行
+# 北京时间周一至周六晚上八点执行
 on:
 #  push:
 #    branches: [ master ]
   schedule:
-  - cron: "0 10 * * 1-6"
+  - cron: "0 12 * * 1-6"
 #  - cron: "*/60 * * * *"
 
 # 通知
