@@ -30,6 +30,6 @@ jobs:
           "msgtype":"text",
           "text":{
               "mentioned_mobile_list":["@all"],
-              "content":"今日加班的同事可前往食堂就餐或点外卖，相关费用记录至 https://cutt.ly/wjpLbMV，本周结束统一结算。"
+              "content":"今日加班的同事可前往食堂就餐或点外卖，相关费用记录至 https://is.gd/r90taA，本周结束统一结算。"
               }
           }'
