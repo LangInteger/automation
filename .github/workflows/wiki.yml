@@ -50,7 +50,7 @@ jobs:
         run: |
           echo "merged $title $url from $frombranch to $tobranch with body $body"
           pip install markdown-to-json
-          python base_repo/shells/update_wiki.py $body wiki_repo $url $title
+          python base_repo/shells/update_wiki.py "$body" wiki_repo "$url" "$title"
 
       - name: Push to wiki
         run: |
