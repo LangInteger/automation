@@ -14,7 +14,7 @@ def process_input_string(input_string):
     lines = input_string.split('\n')
     for line in lines:
         strip_line = line.strip()
-        if strip_line.startwith("- [x]") and strip_line.endswith("service"):
+        if strip_line.startswith("- [x]") and strip_line.endswith("service"):
             changed_services.add(strip_line.string.rsplit(None, 1)[-1])
     return changed_services
 
