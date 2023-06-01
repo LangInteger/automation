@@ -4,8 +4,8 @@ on:
 #  push:
 #    branches:
 #      - master
-  schedule:
-    - cron: "10 1,3,7 * * *" # 北京时间每日9点10分，12点10分和15点10分
+#  schedule:
+#    - cron: "10 1,3,7 * * *" # 北京时间每日9点10分，12点10分和15点10分
 jobs:
   notification:
     runs-on: ubuntu-latest

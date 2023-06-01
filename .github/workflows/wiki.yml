@@ -1,0 +1,22 @@
+name: Pull Request Workflow
+
+# https://stackoverflow.com/a/61565445/9304616
+# detect pull request meged to one branch
+on:
+  push:
+    branches:
+      - master
+jobs:
+  update_wiki:
+    if: github.event.pull_request.merged == true
+    # 使用最新 ubuntu 系统
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 8BitJonny/gh-get-current-pr@2.2.0
+        id: PR
+
+      - name: "Pull Request ${{ steps.PR.outputs.number }}"
+        if: steps.PR.outputs.pr_found == 'true'
+        run: |
+          echo "from ${{ fromJSON(steps.PR.outputs.pr).head.ref }}"
+          echo "to ${{ fromJSON(steps.PR.outputs.pr).base.ref }}"
