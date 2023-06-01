@@ -1,4 +1,4 @@
-name: Pull Request Workflow
+name: wiki_generator
 
 # https://stackoverflow.com/a/61565445/9304616
 # detect pull request meged to one branch
@@ -8,7 +8,7 @@ on:
       - closed
 
 jobs:
-  if_merged:
+  generate_wiki:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
