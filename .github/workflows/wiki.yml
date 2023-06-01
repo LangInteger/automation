@@ -3,13 +3,13 @@ name: Pull Request Workflow
 # https://stackoverflow.com/a/61565445/9304616
 # detect pull request meged to one branch
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    types:
+      - closed
+
 jobs:
-  update_wiki:
+  if_merged:
     if: github.event.pull_request.merged == true
-    # 使用最新 ubuntu 系统
     runs-on: ubuntu-latest
     steps:
       - uses: 8BitJonny/gh-get-current-pr@2.2.0
