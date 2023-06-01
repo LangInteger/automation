@@ -9,9 +9,9 @@ Include any relevant screenshots here.
 
 ### Affected Services
 
-- [] demo_service
-- [] a_service
-- [] b_service
+- [ ] demo_service
+- [ ] a_service
+- [ ] b_service
 
 ### Other Information
 Any other information that is important to this PR.
