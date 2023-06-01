@@ -7,5 +7,9 @@ Closes xx
 ### Screenshots
 Include any relevant screenshots here.
 
+### Affected Services
+
+- [] demo_service
+
 ### Other Information
 Any other information that is important to this PR.

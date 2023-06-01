@@ -12,12 +12,47 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - uses: 8BitJonny/gh-get-current-pr@2.2.0
+      - name: checkout repo content
+        uses: actions/checkout@v2
+
+      - name: Checkout wiki code
+        uses: actions/checkout@v2
+        with:
+          repository: ${{github.repository}}.wiki
+          path: wiki_repo
+
+      - name: check wiki repo content
+        run: |
+          cd wiki_repo
+          ls -al
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' # install the python version needed
+
+      - name: parse pull request
+        uses: 8BitJonny/gh-get-current-pr@2.2.0
         id: PR
 
-      - name: "Pull Request ${{ steps.PR.outputs.number }}"
+      - name: "Pull Request ${{ steps.PR.outputs.number }} wiki update"
         if: steps.PR.outputs.pr_found == 'true'
+        # for more content github event offers
+        # https://docs.github.com/en/rest/commits/commits#list-pull-requests-associated-with-a-commit
+        env:
+          url: ${{ fromJSON(steps.PR.outputs.pr).url }}
+          title: ${{ fromJSON(steps.PR.outputs.pr).title }}
+          body: ${{ fromJSON(steps.PR.outputs.pr).body }} 
+          frombranch: ${{ fromJSON(steps.PR.outputs.pr).head.ref }}
+          tobranch: ${{ fromJSON(steps.PR.outputs.pr).base.ref }}
         run: |
-          echo "from ${{ fromJSON(steps.PR.outputs.pr).head.ref }}"
-          echo "to ${{ fromJSON(steps.PR.outputs.pr).base.ref }}"
-          echo "to ${{ fromJSON(steps.PR.outputs.pr).body }}"
+          echo "merged $title $url from $frombranch to $tobranch with body $body "
+          echo $body > wiki_repo/test.md
+
+      - name: Push to wiki
+        run: |
+          cd wiki_repo
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Add changes" && git push
