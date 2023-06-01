@@ -18,6 +18,34 @@ def process_input_string(input_string):
             changed_services.add(strip_line.rsplit(None, 1)[-1])
     return changed_services
 
+def markdown_to_dict(lines):
+
+    # Initialize the dictionary
+    result = {}
+
+    # Iterate over the lines
+    current_title = None
+    for line in lines:
+        # Check if this line is a new title
+        if line.startswith('#'):
+            # If we're already processing a title, add its list to the result dictionary
+            if current_title is not None:
+                result[current_title] = current_list
+
+            # Set the new title and create a new list for its items
+            current_title = line.strip().lstrip('# ')
+            current_list = []
+
+        # Otherwise, assume this line is an item in the current list
+        else:
+            current_list.append(line.strip())
+
+    # Add the last title's list to the result dictionary
+    if current_title is not None:
+        result[current_title] = current_list
+
+    return result
+
 def merge_changes_to_file(input_string, directory, change):
     
     next_tuesday_date = next_tuesday()
@@ -35,9 +63,8 @@ def merge_changes_to_file(input_string, directory, change):
     print("service changed: " + str(service_changed))
     with open(file_path, 'r+') as f:
         value = f.readlines()
-        ast = markdown_to_json.CommonMark.DocParser().parse(value)
-        dictionary = markdown_to_json.CMarkASTNester().nest(ast)
-        print("already exist chagnes: " + dictionary)
+        dictionary = markdown_to_dict(value)
+        print("already exist chagnes: " + str(dictionary))
         for service in service_changed:
             if service in dictionary:
                 dictionary[service].append(change)
@@ -51,7 +78,7 @@ def merge_changes_to_file(input_string, directory, change):
             output_str += values_str + "\n"
         print("finally markdown: " + output_str)
         # Move the file pointer to the beginning of the file
-        file.seek(0)
+        f.seek(0)
         f.write(output_str)
 
 if __name__ == '__main__':
