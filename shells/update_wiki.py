@@ -7,7 +7,7 @@ import markdown_to_json
 def next_tuesday():
     today = datetime.today()
     next_tuesday = today + timedelta((1 - today.weekday()) % 7)
-    return next_tuesday.strftime('%Y-%m-%d')
+    return next_tuesday.strftime('%Y_%m_%d')
 
 def process_input_string(input_string):
     changed_services = set()
@@ -49,15 +49,24 @@ def markdown_to_dict(lines):
 def merge_changes_to_file(input_string, directory, change):
     
     next_tuesday_date = next_tuesday()
-    file_name = f'{next_tuesday_date}_changes.md'
+    # create xxx_deploy.md
+    file_name = f'{next_tuesday_date}_deploy.md'
     file_path = os.path.join(directory, file_name)
-    print("file path is " + file_path)
-
     try:
         file = open(file_path, "x")
         file.close()
     except FileExistsError:
         print(f"The file '{file_path}' already exists.")
+
+    # create xxx_changes.md
+    file_name = f'{next_tuesday_date}_changes.md'
+    file_path = os.path.join(directory, file_name)
+    try:
+        file = open(file_path, "x")
+        file.close()
+    except FileExistsError:
+        print(f"The file '{file_path}' already exists.")
+    print("file path is " + file_path)
         
     service_changed = process_input_string(input_string)
     print("service changed: " + str(service_changed))
