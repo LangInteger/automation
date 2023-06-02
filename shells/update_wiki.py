@@ -2,7 +2,6 @@
 import sys
 import os
 from datetime import datetime, timedelta
-import markdown_to_json
 
 def next_tuesday():
     today = datetime.today()
