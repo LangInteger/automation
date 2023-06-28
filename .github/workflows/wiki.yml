@@ -36,8 +36,6 @@ jobs:
       - name: parse pull request
         uses: 8BitJonny/gh-get-current-pr@2.2.0
         id: PR
-        run: |
-          echo "output is "${{ steps.PR.outputs }}
 
       - name: "Pull Request ${{ steps.PR.outputs.number }} wiki update"
         if: steps.PR.outputs.pr_found == 'true'
