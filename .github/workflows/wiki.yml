@@ -36,6 +36,11 @@ jobs:
       - name: parse pull request
         uses: 8BitJonny/gh-get-current-pr@2.2.0
         id: PR
+      - run: echo "PR is ${prJSON}"
+        env:
+          # JSON object with the full PR object
+          # toJSON(fromJSON(...pr)) parses it into memory and then format is with pretty-print.
+          prJSON: ${{ toJSON(fromJSON(steps.current_pr.outputs.pr)) }}
 
       - name: "Pull Request ${{ steps.PR.outputs.number }} wiki update"
         if: steps.PR.outputs.pr_found == 'true'
